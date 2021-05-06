@@ -4,7 +4,8 @@
 
 ## 目次
 [はじめに](#はじめに)</br>
-[①php基礎](doc/01_php_basic.md)</br>
+[PHP入門編1:PHPをはじめよう](doc/01_php_basic01.md)</br>
+[PHP入門編2:条件によって処理を変えてみよう](doc/02_php_basic02.md)</br>
 [備考メモ](doc/memo.md)</br>
 
 </br>
