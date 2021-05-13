@@ -37,7 +37,7 @@ $name_2 = "魔法使い"
 ```php
 <?php
 $team =  array('勇者';'魔法使い')
-print_r($team); 
+print_r($team);  //配列を出力する関数
 ?>
 ```
 ↓出力結果
@@ -60,3 +60,30 @@ keyは0から勝手に割り振られる。</br>
 **配列を出力する関数**</br>
 `print_R(出力したい配列)`
 [参考:print_r](https://www.php.net/manual/ja/function.print-r.php/)</br>
+</br>
+
+また、`array()`には変数を代入する事が可能。</br>
+そのほかに`print_R(出力したい配列)`は`echo`と同様に変数の値を出力する事も可能である。
+```php
+<?php
+$name_1 = "勇者2";
+$name_2 = "魔法使い2";
+$team =  array('勇者','魔法使い',$name_1);
+print_r($team);
+print_r($name_1);
+?>
+```
+↓出力結果
+```
+Array
+(
+    [0] => 勇者
+    [1] => 魔法使い
+    [2] => 勇者2
+)
+勇者2
+```
+</br>
+
+### 4-3_
+
