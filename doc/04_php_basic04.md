@@ -62,8 +62,8 @@ keyは0から勝手に割り振られる。</br>
 [参考:print_r](https://www.php.net/manual/ja/function.print-r.php/)</br>
 </br>
 
-また、`array()`には変数を代入する事が可能。</br>
-そのほかに`print_R(出力したい配列)`は`echo`と同様に変数の値を出力する事も可能である。
+`array()`には変数を代入する事が可能。</br>
+`print_R(出力したい配列)`は`echo`と同様に変数の値を出力する事も可能である。
 ```php
 <?php
 $name_1 = "勇者2";
