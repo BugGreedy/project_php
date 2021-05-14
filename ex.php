@@ -1,13 +1,11 @@
 <?php
-// echo "こんにちは、\nここから２行目です。\n";
-// echo 'こんにちは、\nここから２行目です。';
-
-// $sum = 10+20;
-// echo $sum,"\n";
-// echo '$sum',"\n";
-// echo "$sum","\n";
-
-
-$sum = 10 + 20;
-echo "\$sumの内容は、{10+20}です。";
+    // 自分の得意な言語で
+    // Let's チャレンジ！！
+    $input = trim(fgets(STDIN));
+    $a = trim(substr($input,0,3));
+    $b = trim(substr($input,3,3));
+    $c = abs((INT)$a-(INT)$b);
+    echo $a."\n";
+    echo $b."\n";
+    echo $c;
 ?>
