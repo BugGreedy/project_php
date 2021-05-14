@@ -1,4 +1,5 @@
 <?php
-  $i = sqrt(6 + 30);
+  $input = trim(fgets(STDIN));
+  $i = mb_substr($input,3,3);
   echo $i;
   ?>
