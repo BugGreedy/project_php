@@ -212,9 +212,25 @@ Array
   )
   3
   ```
-  **count関数**</br>
+- **count関数**</br>
   `count(配列名)`でその配列内の要素数を集計する事ができる。
-
+  count関数とループを組み合わせた使い方の例
+  ```php
+  $input = trim(fgets(STDIN));
+  $array = explode(",",$input);
+  $num = count($array);
+  for($i = 0;$i <= $num-1;$i ++){
+      echo $array[$i]."さん\n";
+  }
+  ```
+  "ティガ,ナルガ,レウス"と入力。
+  ↓出力結果
+  ```
+  ティガさん
+  ナルガさん
+  レウスさん
+  ```
+  
   ***
 
 ### 4-5_配列にデータを格納してみよう１
