@@ -328,5 +328,27 @@ Array
 ***
 
 ### 4-7_配列を使ったランダムくじ引き
-入力：もぐら、こうもり、らくだ
 ```php
+<?php
+//入力：もぐら、こうもり、らくだ、かめごろう、かめっくす
+$input = trim(fgets(STDIN));
+$member = explode("、",$input);
+print_r($member);
+$max = count($member)-1;
+$key = rand(0,$max);
+echo $key.':'.$member[$key];
+?>
+```
+↓出力結果
+```
+(
+    [0] => もぐら
+    [1] => こうもり
+    [2] => らくだ
+    [3] => かめごろう
+    [4] => かめっくす
+)
+1:こうもり
+```
+
+
