@@ -136,3 +136,81 @@ Array
 *** 
 
 ### 5-4_連想配列の整列
+連想配列にsortをかけると通常の配列に変換されて出力されてしまう。
+```php
+<?php
+$item = array(
+  "ツヴァイ" => 20,
+  "蛇人の剣" => 30,
+  "グレソ" => 50,
+);
+print_r($item);
+rsort($item);
+print_r($item);
+?>
+```
+↓出力結果
+```php
+Array
+(
+    [ツヴァイ] => 20
+    [蛇人の剣] => 30
+    [グレソ] => 50
+)
+Array
+(
+    [0] => 50
+    [1] => 30
+    [2] => 20
+)
+```
+
+- **asort関数/arsort関数**</br>
+  asort関数は**value**を昇順に並べ替える。 </br>
+  arsort関数は**value**を降順に並べ替える。 </br>
+  </br>
+
+- **ksort関数/ksort関数**</br>
+  ksort関数は**key**を昇順に並べ替える。 </br>
+  krsort関数は**key**を降順に並べ替える。 </br>
+
+```php
+<?php
+$item = array(
+  "ツヴァイ" => 20,
+  "蛇人の剣" => 30,
+  "グレソ" => 50,
+);
+print_r($item);
+asort($item);
+print_r($item);
+arsort($item);
+print_r($item);
+ksort($item);
+print_r($item);
+krsort($item);
+print_r($item);
+?>
+```
+↓出力結果
+```php
+Array
+(
+    [グレソ] => 50
+    [蛇人の剣] => 30
+    [ツヴァイ] => 20
+)
+Array
+(
+    [グレソ] => 50
+    [ツヴァイ] => 20
+    [蛇人の剣] => 30
+)
+Array
+(
+    [蛇人の剣] => 30
+    [ツヴァイ] => 20
+    [グレソ] => 50
+)
+```
+
