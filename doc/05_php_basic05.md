@@ -4,6 +4,7 @@
 [5-2_連想配列の基本操作](#5-2_連想配列の基本操作)</br>
 [5-3_配列の整列](#5-3_配列の整列)</br>
 [5-4_連想配列の整列](#5-4_連想配列の整列)</br>
+[5-5_foreachで配列の値を取り出す１](#5-5_foreachで配列の値を取り出す１)</br>
 
 
 ***
@@ -180,17 +181,21 @@ Array
 ```php
 <?php
 $item = array(
-  "ツヴァイ" => 20,
   "蛇人の剣" => 30,
+  "ツヴァイ" => 20,
   "グレソ" => 50,
 );
 print_r($item);
+
 asort($item);
 print_r($item);
+
 arsort($item);
 print_r($item);
+
 ksort($item);
 print_r($item);
+
 krsort($item);
 print_r($item);
 ?>
@@ -199,6 +204,18 @@ print_r($item);
 ```php
 Array
 (
+    [蛇人の剣] => 30
+    [ツヴァイ] => 20
+    [グレソ] => 50
+)
+Array
+(
+    [ツヴァイ] => 20
+    [蛇人の剣] => 30
+    [グレソ] => 50
+)
+Array
+(
     [グレソ] => 50
     [蛇人の剣] => 30
     [ツヴァイ] => 20
@@ -215,5 +232,50 @@ Array
     [ツヴァイ] => 20
     [グレソ] => 50
 )
+
 ```
+
+***
+
+### 5-5_foreachで配列の値を取り出す１
+**foreach文**</br>
+配列に対して、値を取り出し、値ごとに処理を行う。</br>
+使用例としては、配列に都道府県名などを入れておいてプルダウンメニューとして取り出すなど。
+下記のような記述で使用する。</br>
+`foreach(配列名 as バリューを代入する変数)`
+```php
+<?php
+$array = array('騎士','呪術師','持たざるもの');
+foreach($array as $value){
+  echo $value."\n";
+}
+?>
+```
+↓出力結果
+```php
+騎士
+呪術師
+持たざるもの
+```
+</br>
+
+上記は`print_r`とさほど変わらないが、例えばHTMLタグを挿入するなどの事に活用できる。</br>
+```php
+<?php
+$array = array('騎士','呪術師','持たざるもの');
+foreach($array as $value){
+  echo "<strong>".$value."</strong><br>\n";
+}
+?>
+```
+↓出力結果</br>
+```php
+<strong>騎士</strong><br>
+<strong>呪術師</strong><br>
+<strong>持たざるもの</strong><br>
+```
+↓HTML</br>
+<strong>騎士</strong><br>
+<strong>呪術師</strong><br>
+<strong>持たざるもの</strong><br>
 

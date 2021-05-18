@@ -303,7 +303,7 @@ print_r($array);
 こちらをまとめてしまう記述方式がある。
 ```php
 <?php
-white($input = fgets(STDIN)){
+while($input = fgets(STDIN)){
     $array[] = trim($input);
 }
 print_r($array);
