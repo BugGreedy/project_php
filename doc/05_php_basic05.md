@@ -284,13 +284,13 @@ foreach($array as $value){
 ***
 
 ### 5-6_foreachで配列の値を取り出す２
-今回は配列のkeyも取得する。記述方法は下記</br>
+今回は配列のkeyも取得する。記述方法は下記。</br>
 ```php
 foreach(配列 as キーを代入する変数 => バリューを代入する変数){
 処理
 }
 ```
-実際にやってみる</br>
+実際にやってみる。</br>
 ```php
 <?php
 $array = array('騎士','呪術師','持たざるもの');
@@ -310,5 +310,25 @@ foreach($array as $key => $value){
 1:<strong>呪術師</strong><br>
 2:<strong>持たざるもの</strong><br>
 </br>
+
+連想配列でも同様の事が可能。
+```php
+<?php
+$array = array(
+  '騎士' => 'ショートソード',
+  '呪術師' => '呪術の火',
+  '持たざるもの' => 'なし'
+);
+foreach($array as $key => $value){
+  echo $key."の初期装備は<strong>".$value."</strong>です。<br>\n";
+}
+?>
+```
+↓出力結果(HTML)</br>
+騎士の初期装備は<strong>ブロードソード</strong>です。<br>
+呪術師の初期装備は<strong>呪術の火</strong>です。<br>
+持たざるものの初期装備は<strong>なし</strong>です。<br>
+</br>
+
 
 
