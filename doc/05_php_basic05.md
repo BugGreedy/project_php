@@ -316,7 +316,7 @@ foreach($array as $key => $value){
 <?php
 $array = array(
   '騎士' => 'ショートソード',
-  '呪術師' => '呪術の火',
+  '呪術師' => 'ハンドアックス',
   '持たざるもの' => 'なし'
 );
 foreach($array as $key => $value){
@@ -326,7 +326,7 @@ foreach($array as $key => $value){
 ```
 ↓出力結果(HTML)</br>
 騎士の初期装備は<strong>ブロードソード</strong>です。<br>
-呪術師の初期装備は<strong>呪術の火</strong>です。<br>
+呪術師の初期装備は<strong>ハンドアックス</strong>です。<br>
 持たざるものの初期装備は<strong>なし</strong>です。<br>
 </br>
 
