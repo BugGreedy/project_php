@@ -5,6 +5,7 @@
 [5-3_配列の整列](#5-3_配列の整列)</br>
 [5-4_連想配列の整列](#5-4_連想配列の整列)</br>
 [5-5_foreachで配列の値を取り出す１](#5-5_foreachで配列の値を取り出す１)</br>
+[5-6_foreachで配列の値を取り出す２](#5-6_foreachで配列の値を取り出す２)</br>
 
 
 ***
@@ -274,8 +275,40 @@ foreach($array as $value){
 <strong>呪術師</strong><br>
 <strong>持たざるもの</strong><br>
 ```
-↓HTML</br>
+↓出力結果(HTML)</br>
 <strong>騎士</strong><br>
 <strong>呪術師</strong><br>
 <strong>持たざるもの</strong><br>
+</br>
+
+***
+
+### 5-6_foreachで配列の値を取り出す２
+今回は配列のkeyも取得する。記述方法は下記</br>
+```php
+foreach(配列 as キーを代入する変数 => バリューを代入する変数){
+処理
+}
+```
+実際にやってみる</br>
+```php
+<?php
+$array = array('騎士','呪術師','持たざるもの');
+foreach($array as $key => $value){
+  echo $key.":<strong>".$value."</strong><br>\n";
+}
+?>
+```
+↓出力結果
+```php
+0:<strong>騎士</strong><br>
+1:<strong>呪術師</strong><br>
+2:<strong>持たざるもの</strong><br>
+```
+↓出力結果(HTML)</br>
+0:<strong>騎士</strong><br>
+1:<strong>呪術師</strong><br>
+2:<strong>持たざるもの</strong><br>
+</br>
+
 
