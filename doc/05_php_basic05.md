@@ -368,4 +368,32 @@ foreach($array as $key => $value){
 
 ### 5-8_RPGのアイテムリストを再現2
 5-7を具体的に記述する。
-
+```php
+<?php
+$item_img = array(
+    "剣" => "http://paiza.jp/learning/images/sword.png",
+    "盾" => "http://paiza.jp/learning/images/shield.png",
+    "回復薬" => "http://paiza.jp/learning/images/potion.png",
+    "クリスタル" => "http://paiza.jp/learning/images/crystal.png"
+);
+$item_order = array("クリスタル", "盾", "剣", "回復薬");
+// 並び順配列をループさせてアイテム名を表示
+foreach($item_order as $item_name){
+  // アイテム名を元に画像用配列から画像ファイル名を取得
+  echo "<img src=".$item_img[$item_name].">";
+  echo $item_name."<br>\n";
+}
+?>
+```
+↓出力結果
+```html
+<img src=http://paiza.jp/learning/images/crystal.png>クリスタル<br>
+<img src=http://paiza.jp/learning/images/shield.png>盾<br>
+<img src=http://paiza.jp/learning/images/sword.png>剣<br>
+<img src=http://paiza.jp/learning/images/potion.png>回復薬<br>
+```
+↓出力結果
+<img src=http://paiza.jp/learning/images/crystal.png>クリスタル<br>
+<img src=http://paiza.jp/learning/images/shield.png>盾<br>
+<img src=http://paiza.jp/learning/images/sword.png>剣<br>
+<img src=http://paiza.jp/learning/images/potion.png>回復薬<br>
