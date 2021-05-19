@@ -5,11 +5,11 @@ $item_img = array(
     "回復薬" => "http://paiza.jp/learning/images/potion.png",
     "クリスタル" => "http://paiza.jp/learning/images/crystal.png"
 );
-$item_order = array("クリスタル", "盾", "剣", "回復薬");
+$item_order = array("盾", "剣", "クリスタル", "回復薬",  "回復薬",  "回復薬");
 // 並び順配列をループさせてアイテム名を表示
-foreach($item_order as $item_name){
+foreach ($item_order as $item_name) {
   // アイテム名を元に画像用配列から画像ファイル名を取得
-  echo "<img src=".$item_img[$item_name].">";
+  echo "<img src=" . $item_img[$item_name] . ">";
   echo $item_name . "<br>\n";
 }
 ?>
