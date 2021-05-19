@@ -1,4 +1,4 @@
 <?php
-  $i = "あ";
-  echo $i;
-  ?>
+  $str = "paiza";
+  echo strrev($str);
+?>
