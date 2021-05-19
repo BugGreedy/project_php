@@ -341,6 +341,7 @@ foreach($array as $key => $value){
 3. 同じアイテムの画像指定は1箇所にしたい
 4. アイテムの並び順を管理したい
    </br>
+   </br>
 このような時はアイテムと画像を結びつける連想配列(下記では`$item_img`)と並び順を管理する配列(下記では`item_order`)を用いる。</br>
 リストの表示のさせ方としては、並び順配列をforeachでループさせながら一つ一つのvalue(アイテム名)をもとに画像配列から画像ファイルを取り出すといった具合。</br>
 
@@ -351,7 +352,6 @@ foreach($array as $key => $value){
   | 盾         | shield.png     |
   | 回復薬     | potion.png    |
   | クリスタル | crystal.png   |
-</br>
 
 - $item_order(並び順配列)</br>
   | key        | value          |
