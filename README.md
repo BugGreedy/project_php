@@ -9,6 +9,7 @@
 [PHP入門編3:ループ処理を学ぶ](doc/03_php_basic03.md)</br>
 [PHP入門編4:配列の基礎、explodeを学ぶ](doc/04_php_basic04.md)</br>
 [PHP入門編5:連想配列、foreach、ソートを学ぶ](doc/05_php_basic05.md)</br>
+[PHP入門編6:多次元配列を理解しよう](doc/06_php_basic06.md)</br>
 [備考メモ・関数など](doc/memo.md)</br>
 
 </br>
