@@ -731,6 +731,9 @@ echo "</table>";
 ```
 ↓出力結果
 ```
+<table>
+<tr>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
 <td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
 <td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
 <td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
@@ -748,8 +751,12 @@ echo "</table>";
 <td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Heroine.png></td>
 </tr>
 </table>
+
 ```
 ↓出力結果(HTML)
+<table>
+<tr>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
 <td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
 <td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
 <td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
@@ -767,4 +774,5 @@ echo "</table>";
 <td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Heroine.png></td>
 </tr>
 </table>
+
 
