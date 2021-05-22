@@ -11,6 +11,7 @@
 [6-9_2次元配列で地図を表示する1](#6-9_2次元配列で地図を表示する1)</br>
 [6-10_2次元配列で地図を表示する2](#6-10_2次元配列で地図を表示する2)</br>
 [6-11_標準入力から2次元配列](#6-11_標準入力から2次元配列)</br>
+[6-12_2次元配列で画像を配置](#6-12_2次元配列で画像を配置)</br>
 
 ***
 
@@ -691,3 +692,79 @@ foreach($table as $line){
 ##    ##      ##
   ############  
 ```
+</br>
+
+***
+
+### 6-12_2次元配列で画像を配置  
+将棋のマス目の中に画像を表示するような記述を行う。
+```php
+<?php
+//画像URL用配列
+$playerImages =
+    array(
+        "https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Empty.png",
+        "https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png",
+        "https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Crystal.png",
+        "https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Hero.png",
+        "https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Heroine.png");
+
+//画像配置用の記述
+$playersPositions =
+    array(
+      array(1,1,1,1),
+      array(0,0,0,0),
+      array(1,2,3,4)
+    );
+
+echo "<table>\n"; 
+foreach($playersPositions as $line){
+  echo "<tr>\n";
+  foreach($line as $player){
+    echo "<td><img src=".$playerImages[$player]."></td>\n";
+  }
+  echo "</tr>\n";
+}
+echo "</table>";
+
+?>
+```
+↓出力結果
+```
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
+</tr>
+<tr>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Empty.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Empty.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Empty.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Empty.png></td>
+</tr>
+<tr>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Crystal.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Hero.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Heroine.png></td>
+</tr>
+</table>
+```
+↓出力結果(HTML)
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
+</tr>
+<tr>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Empty.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Empty.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Empty.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Empty.png></td>
+</tr>
+<tr>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Dragon.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Crystal.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Hero.png></td>
+<td><img src=https://paiza-webapp.s3.amazonaws.com/files/learning/rpg/Heroine.png></td>
+</tr>
+</table>
+
