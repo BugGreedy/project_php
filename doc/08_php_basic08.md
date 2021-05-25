@@ -137,6 +137,41 @@ foreach($enemies as $enemy){
 メデューサは主人公を攻撃した。
 かまいたちは主人公を攻撃した。
 ```
+</br>
+
+メソッドに変数を渡すときの記述方法
+```php
+<?php
+
+class Enemy{
+  public $myName;
+  public function __construct($name){
+    $this -> myName = $name;
+  }
+  public function attack($player){
+    echo $this->myName. "は".$player."を攻撃した。\n";
+  }
+}
+
+$enemies[] = new Enemy("ディアボロ");
+$enemies[] = new Enemy("メデューサ");
+$enemies[] = new Enemy("かまいたち");
+
+echo "あなたのお名前は？\n";
+$player = trim(fgets(STDIN));
+foreach($enemies as $enemy){
+  $enemy -> attack($player);
+}
+?>
+```
+↓出力結果
+```php
+あなたのお名前は？
+// 入力:モグラ
+ディアボロはモグラを攻撃した。
+メデューサはモグラを攻撃した。
+かまいたちはモグラを攻撃した。
+```
 
 ***
 
