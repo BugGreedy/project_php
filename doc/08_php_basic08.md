@@ -8,6 +8,7 @@
 [8-4_RPGの敵クラスを作ろう](#8-4_RPGの敵クラスを作ろう)</br>
 [8-5_引数と戻り値のあるメソッドを作ろう](#8-5_引数と戻り値のあるメソッドを作ろう)</br>
 [8-6_アクセス修飾子を理解しよう](#8-6_アクセス修飾子を理解しよう)</br>
+[8-7_staticを理解しよう](#8-7_staticを理解しよう)</br>
 
 ***
 
@@ -257,4 +258,92 @@ Call Stack:
 ハンターは荒野を歩いていた。
 ハンター
 ```
+</br>
 
+同様の事をメソッドに対して行ってみる。
+```php
+<?php
+class Player{
+  public $myName;
+  public function __construct($name){
+    $this->myName = $name;
+  }
+  private function walk(){   //このメソッドをprivateにして
+    echo $this->myName."は荒野を歩いていた。\n";
+  }
+  public function output(){
+    echo $this->walk();
+  }
+}
+
+$player = new Player("ハンター");
+$player-> output();       //クラス内で別のメソッドに渡してから呼び出すと正しく出力できる。
+echo $player->myName;
+?>
+```
+↓出力結果
+```
+ハンターは荒野を歩いていた。
+ハンター
+```
+
+### 8-7_staticを理解しよう
+静的なメソッドや変数を定義するキーワードである**static**について。</br>
+**static**とは複数のオブジェクト間で使用できる共通の変数。</br>
+```php
+<?php
+class Item {
+  public static $tax = 1.08;  //staticを追記
+  public $price;
+  Public $quantity; 
+
+  public function __construct($newPrice, $newQuantity){
+    $this ->price = $newPrice;
+    $this ->quantity = $newQuantity;
+  }
+
+  public function getTotalPrice(){
+    return round($this->price * $this ->quantity * self::$tax);  //このように記述する
+  }
+}
+
+$apple = new Item(150,10);
+echo "合計金額は".$apple -> getTotalPrice()."円です。\n";
+
+$orange = new Item(85,32);
+echo "合計金額は" . $orange->getTotalPrice() . "円です。\n";
+?>
+```
+↓出力結果
+```
+合計金額は1620円です。
+合計金額は2938円です。
+```
+</br>
+
+また**static**にはオブジェクトを生成しなくてもメソッドを呼び出せるという特性がある。
+```php
+<?php
+class Item {
+  public static $tax = 1.08;
+  // public $price;
+  // Public $quantity; 
+
+  // public function __construct($newPrice, $newQuantity){
+  //   $this ->price = $newPrice;
+  //   $this ->quantity = $newQuantity;
+  // }
+
+  public static function getTotalAmount($price,$quantity){
+    return round($price * $quantity * self::$tax);
+  }
+}
+
+$total = Item::getTotalAmount(150,10);
+echo "合計金額は".$total."円です。\n";
+?>
+```
+↓出力結果
+```
+合計金額は1620円です。
+```
