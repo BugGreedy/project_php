@@ -2,8 +2,8 @@
 class Box {
   public $myItem;
 
-  public function __construct($item){
-    $this -> myItem = $item;
+  public function __construct(){
+    $this -> myItem = "新しいアイテム";
   }
 
   public function open(){
@@ -11,21 +11,16 @@ class Box {
   }
 }
 
-class MagicBox extends Box{
+class JewelryBox extends Box{  //継承の記述は class 小クラス名 extends 親クラス名{}
   public function look(){
-  echo "宝箱は妖しく輝いている.\n";
-  }
-
-  public function open(){  //親クラスで定義したメソッドと同名のメソッドを編集することで再定義できる。
-    echo "宝箱を開いた。". $this -> myItem."が襲ってきた!\n";
+    echo "宝箱はキラキラと輝いている.\n";
   }
 }
 
-
-$chest = new Box("太刀");
+$chest = new Box();
 $chest -> open();
 echo "\n";
-$magicBox = new MagicBox("貪欲者");
-$magicBox -> look();
-$magicBox -> open();
+$jewelryChest = new JewelryBox();
+$jewelryChest -> look();
+$jewelryChest -> open();  //Boxクラスのメソッドやメンバ変数を引き継いで利用できる。
 ?>

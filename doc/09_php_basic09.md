@@ -4,6 +4,10 @@
 [9-1_さらにクラスについて学習しよう](#9-1_さらにクラスについて学習しよう)</br>
 [9-2_クラスを継承する](#9-2_クラスを継承する)</br>
 [9-3_メソッドのオーバーライド](#9-3_メソッドのオーバーライド)</br>
+[9-4_RPGのPlayerクラスを継承で記述1](#9-4_RPGのPlayerクラスを継承で記述1)</br>
+[9-5_RPGのPlayerクラスを継承で記述2](#9-5_RPGのPlayerクラスを継承で記述2)</br>
+[9-6_クラスからメソッドを呼び出してみよう](#9-6_クラスからメソッドを呼び出してみよう)</br>
+[9-7_クラス変数とクラスメソッドを使おう](#9-7_クラス変数とクラスメソッドを使おう)</br>
 
 ***
 
@@ -111,3 +115,148 @@ $magicBox -> open();
 宝箱を開いた。貪欲者が襲ってきた!
 ```
 
+***
+
+### 9-4_RPGのPlayerクラスを継承で記述1
+クラスを継承する具体例として、RPGのPlayerクラスを継承で記述する。</br>
+今回はクラスを作ってメソッドを取り出すところまで
+```php
+<?php
+class Player {
+  public $myName;
+
+  public function __construct($name){
+    $this -> myName = $name;
+  }
+
+  public function attack($enemy){
+    echo $this ->myName."は".$enemy."を攻撃した。\n";
+  }
+}
+
+echo "=== パーティーでスライムと戦う ===\n";
+$hero = new Player("勇者");
+// $hero -> attack("スライム");
+$warrior = new Player("戦士");
+
+$party = [$hero,$warrior];
+foreach($party as $member){
+  $member -> attack("スライム");
+}
+?>
+```
+↓出力結果
+```
+=== パーティーでスライムと戦う ===
+勇者はスライムを攻撃した。
+戦士はスライムを攻撃した。
+```
+
+***
+
+### 9-5_RPGのPlayerクラスを継承で記述2
+前回に引き続き、クラスを継承して子クラスを作る。
+```php
+<?php
+class Player {
+  public $myName;
+
+  public function __construct($name){
+    $this -> myName = $name;
+  }
+
+  public function attack($enemy){
+    echo $this ->myName."は".$enemy."を攻撃した。\n";
+  }
+}
+
+class Wizard extends Player{
+  public function attack($enemy){
+    echo "dhinn!!\n";
+    echo $this->myName."は".$enemy."に炎を放った。\n";
+  }
+
+}
+
+echo "=== パーティーでスライムと戦う ===\n";
+$hero = new Player("勇者");
+// $hero -> attack("スライム");
+$warrior = new Player("戦士");
+$wizard = new Wizard ("魔法使い");
+$party = [$hero,$warrior,$wizard];
+foreach($party as $member){
+  $member -> attack("スライム");
+}
+?>
+```
+↓出力結果
+```
+=== パーティーでスライムと戦う ===
+勇者はスライムを攻撃した。
+戦士はスライムを攻撃した。
+dhinn!!
+魔法使いはスライムに炎を放った。
+```
+
+***
+
+### 9-6_クラスからメソッドを呼び出してみよう
+親クラスからメソッドを呼び出す記述
+```php
+<?php
+class Player {
+  public $myName;
+
+  public function __construct($name){
+    $this -> myName = $name;
+  }
+
+  public function attack($enemy){
+    echo $this ->myName."は".$enemy."を攻撃した。\n";
+  }
+}
+
+class Wizard extends Player{
+  public function __construct(){
+    //このように記述する事で親のコンストラクトを呼び出す事ができる。
+    //今回ではオブジェクトにもともとの引数を設定している。
+    parent::__construct("魔法使い");
+  }
+  public function attack($enemy){
+    echo "dhinn!!\n";
+    echo $this->myName."は".$enemy."に炎を放った。\n";
+  }
+
+  private function spell(){
+    echo "dhinn!!\n";
+  }
+
+}
+
+echo "=== パーティーでスライムと戦う ===\n";
+$hero = new Player("勇者");
+// $hero -> attack("スライム");
+$warrior = new Player("戦士");
+$wizard = new Wizard ();  //引数をここでは指定していない。
+$party = [$hero,$warrior,$wizard];
+foreach($party as $member){
+  $member -> attack("スライム");
+}
+// $wizard -> spell();
+?>
+```
+↓出力結果
+```
+=== パーティーでスライムと戦う ===
+勇者はスライムを攻撃した。
+戦士はスライムを攻撃した。
+dhinn!!
+魔法使いはスライムに炎を放った。
+```
+
+***
+
+### 9-7_クラス変数とクラスメソッドを使おう
+Playerクラス共通の値を持つメソッドを追加する。</br>
+今回は例としてパーティー人数をカウントするメソッドを追加する。
+```php
