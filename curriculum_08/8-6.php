@@ -1,6 +1,6 @@
 <?php
 class Player{
-  private $myName;
+  public $myName;
   public function __construct($name){
     $this->myName = $name;
   }

@@ -252,4 +252,9 @@ Call Stack:
 ```
 ※`walk();`のようにclass内のメソッドでは使用できるが、`echo $player->myName;`のようにクラス外からの呼び出しでは使用できない。</br>
 </br>
+↓`private $myName;`を`public  $myName;`に修正した際の出力結果
+```
+ハンターは荒野を歩いていた。
+ハンター
+```
 
