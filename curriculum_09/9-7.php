@@ -1,9 +1,16 @@
 <?php
 class Player {
   public $myName;
+  private static $characterCount = 0; //追記箇所
 
   public function __construct($name){
     $this -> myName = $name;
+    Player::$characterCount++;   //static変数を呼ぶときは::を記述する。ここは"Player"でなく"self"でも同様の出力が行われる。
+    echo Player::$characterCount."番目のプレイヤー、".$this->myName."が登場した。\n";
+  }
+
+  public static function characterCount(){   //これをクラスメソッドという。
+    return self::$characterCount;
   }
 
   public function attack($enemy){
@@ -37,5 +44,5 @@ $party = [$hero,$warrior,$wizard];
 foreach($party as $member){
   $member -> attack("スライム");
 }
-// $wizard -> spell();
+echo Player::characterCount()."人でスライムを攻撃した。\n";  //クラスメソッドの呼び出しの記述
 ?>

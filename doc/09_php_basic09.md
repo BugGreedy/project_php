@@ -260,3 +260,70 @@ dhinn!!
 Playerクラス共通の値を持つメソッドを追加する。</br>
 今回は例としてパーティー人数をカウントするメソッドを追加する。
 ```php
+<?php
+class Player {
+  public $myName;
+  private static $characterCount = 0; //追記箇所
+
+  public function __construct($name){
+    $this -> myName = $name;
+    Player::$characterCount++;   //static変数を呼ぶときは::を記述する。ここは"Player"でなく"self"でも同様の出力が行われる。
+    echo Player::$characterCount."番目のプレイヤー、".$this->myName."が登場した。\n";
+  }
+
+  public static function characterCount(){   //これをクラスメソッドという。
+    return self::$characterCount;
+  }
+
+  public function attack($enemy){
+    echo $this ->myName."は".$enemy."を攻撃した。\n"; 
+  }
+}
+
+class Wizard extends Player{
+  public function __construct(){
+    //このように記述する事で親のコンストラクトを呼び出す事ができる。
+    //今回ではオブジェクトにもともとの引数を設定している。
+    parent::__construct("魔法使い");
+  }
+  public function attack($enemy){
+    $this -> spell();
+    echo $this->myName."は".$enemy."に炎を放った。\n";
+  }
+
+  private function spell(){
+    echo "dhinn!!\n";
+  }
+}
+
+echo "=== パーティーでスライムと戦う ===\n";
+$hero = new Player("勇者");
+// $hero -> attack("スライム");
+$warrior = new Player("戦士");
+$wizard = new Wizard ();  //引数をここでは指定していない。
+$party = [$hero,$warrior,$wizard];
+foreach($party as $member){
+  $member -> attack("スライム");
+}
+echo Player::characterCount()."人でスライムを攻撃した。\n";  //クラスメソッドの呼び出しの記述
+?>
+```
+↓出力結果
+```
+=== パーティーでスライムと戦う ===
+1番目のプレイヤー、勇者が登場した。
+2番目のプレイヤー、戦士が登場した。
+3番目のプレイヤー、魔法使いが登場した。
+勇者はスライムを攻撃した。
+戦士はスライムを攻撃した。
+dhinn!!
+魔法使いはスライムに炎を放った。
+3人でスライムを攻撃した。
+```
+</br>
+
+上記の最後のようにオブジェクトを介さず実行するメソッドを**クラスメソッド**という。
+</br>
+
+***
+
