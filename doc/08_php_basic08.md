@@ -7,6 +7,7 @@
 [8-3_変数をクラスで管理しよう](#8-3_変数をクラスで管理しよう)</br>
 [8-4_RPGの敵クラスを作ろう](#8-4_RPGの敵クラスを作ろう)</br>
 [8-5_引数と戻り値のあるメソッドを作ろう](#8-5_引数と戻り値のあるメソッドを作ろう)</br>
+[8-6_アクセス修飾子を理解しよう](#8-6_アクセス修飾子を理解しよう)</br>
 
 ***
 
@@ -176,3 +177,41 @@ foreach($enemies as $enemy){
 ***
 
 ### 8-5_引数と戻り値のあるメソッドを作ろう
+クラスのメソッドに引数と戻り値を追加する方法を記述する。
+```php
+<?php
+class Item {
+  public $price;
+  Public $quantity; //「量・数量」の意味
+
+  public function __construct($newPrice, $newQuantity){
+    $this ->price = $newPrice;
+    $this ->quantity = $newQuantity;
+  }
+
+  public function getTotalPrice(){
+    return $this->price * $this ->quantity;
+  }
+}
+
+$apple = new Item(150,10);
+echo "合計金額は".$apple -> getTotalPrice()."円です。\n";
+
+$orange = new Item(85,32);
+echo "合計金額は" . $orange->getTotalPrice() . "円です。\n";
+
+//メソッドの戻り値を変数に代入する事も可能。
+$totalApple = $apple->getTotalPrice();
+echo "合計金額は" . $totalApple . "円です。\n";
+?>
+```
+↓出力結果
+```
+合計金額は1500円です。
+合計金額は2720円です。
+合計金額は1500円です。
+```
+
+***
+
+### 8-6_アクセス修飾子を理解しよう
