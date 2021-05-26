@@ -215,3 +215,41 @@ echo "合計金額は" . $totalApple . "円です。\n";
 ***
 
 ### 8-6_アクセス修飾子を理解しよう
+クラス定義内のメンバ変数やメソッドについている`public`はどこからでも呼び出せ誰でも使用できる。</br>
+この`public`を`private`に設定するとそのクラス内でしか使えなくなる。</br>
+この`public`を`private`のことを**アクセス修飾子**という。</br>
+publicとprivateの例
+```php
+<?php
+class Player{
+  private $myName; //このメンバ変数をprivateにして実行
+  public function __construct($name){
+    $this->myName = $name;
+  }
+  public function walk(){
+    echo $this->myName."は荒野を歩いていた。\n";
+  }
+}
+
+$player = new Player("ハンター");
+$player-> walk();
+echo $player->myName;
+```
+↓出力結果
+```
+ハンターは荒野を歩いていた。
+PHP Fatal error:  Uncaught Error: Cannot access private property Player::$myName in /Applications/MAMP/htdocs/project_php/curriculum_08/8-6.php:14
+Stack trace:
+#0 {main}
+  thrown in /Applications/MAMP/htdocs/project_php/curriculum_08/8-6.php on line 14
+
+Fatal error: Uncaught Error: Cannot access private property Player::$myName in /Applications/MAMP/htdocs/project_php/curriculum_08/8-6.php on line 14
+
+Error: Cannot access private property Player::$myName in /Applications/MAMP/htdocs/project_php/curriculum_08/8-6.php on line 14
+
+Call Stack:
+    0.0004     397904   1. {main}() /Applications/MAMP/htdocs/project_php/curriculum_08/8-6.php:0
+```
+※`walk();`のようにclass内のメソッドでは使用できるが、`echo $player->myName;`のようにクラス外からの呼び出しでは使用できない。</br>
+</br>
+
