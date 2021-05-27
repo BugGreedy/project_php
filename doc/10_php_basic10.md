@@ -5,6 +5,7 @@
 [10-2_簡単な例外処理をしてみよう](#10-2_簡単な例外処理をしてみよう)</br>
 [10-3_いろいろな書式で例外に対応しよう](#10-3_いろいろな書式で例外に対応しよう)</br>
 [10-4_throwで意図的に例外を投げよう](#10-4_throwで意図的に例外を投げよう)</br>
+[10-5_発生させる例外を変えてみよう](#10-5_発生させる例外を変えてみよう)</br>
 
 
 ***
@@ -225,9 +226,7 @@ try {
   $date = new DateTime("202x-01-01");
   echo $date->format('Y/m/d')."\n";
 } catch (Exception $e) {
-  // echo $e->getMessage()."\n";
   echo "指定された日付が不正です。\n";
-  // echo "発生した例外：",$e,"\n";
   fputs(STDERR,$e->getMessage()."\n"); //ここの文法注意。()とかカンマとか
 } finally {
   echo "end\n";
@@ -237,10 +236,14 @@ try {
 ↓出力結果
 ```php
 //標準出力
+
 start
 指定された日付が不正です。
 end
+
+
 //エラー出力
+
 DateTime::__construct(): Failed to parse time string (202x-01-01) at position 0 (2): Unexpected character
 ```
 </br>
@@ -248,3 +251,91 @@ DateTime::__construct(): Failed to parse time string (202x-01-01) at position 0 
 ***
 
 ### 10-4_throwで意図的に例外を投げよう
+**`throw`**：例外処理を意図的に実行できる。また`catch`と組み合わせる事でメソッド呼び出し元の例外処理を利用できる。(この機能は今回は触れない)</br>
+```php
+<?php
+echo "start\n";
+try {
+  throw new Exception("意図的な例外");     //ここでコンストラクターの引数にメッセージ指定している。
+  echo "例外を投げた後\n";  //実行されていない
+} catch (Exception $e) {
+  echo "例外発生:",$e->getMessage()."\n";
+} finally {
+  echo "end\n";
+}
+?>
+```
+↓出力結果
+```
+start
+例外発生:意図的な例外
+end
+```
+ここでは`throw new Exception("意図的な例外");`と記述した事で例外が発生したことになり、その後の`echo "例外を投げた後\n";`は実行されていない。
+</br>
+</br>
+
+***
+
+### 10-5_発生させる例外を変えてみよう
+Exceptionクラスのオブジェクト以外の例外</br>
+- RangeException:多すぎる少なすぎるといった量や範囲などの例外
+- LengthException:長過ぎる短すぎるといった長さなどの例外
+</br>
+
+前回作成した意図的な例外の記述をRangeExceptionに変えてみる。
+```php
+<?php
+echo "start\n";
+try {
+  throw new RangeException("意図的な例外");
+  echo "例外を投げた後\n";
+} catch (RangeException $e) {
+  echo "例外発生:",$e->getMessage()."\n";
+} finally {
+  echo "end\n";
+}
+?>
+```
+↓出力結果
+```
+start
+例外発生:意図的な例外
+end
+//出力内容自体は変わらない
+```
+</br>
+
+次にthrowの方の例外を`LengthException`に変えてみる。
+```php
+<?php
+echo "start\n";
+try {
+  throw new LengthException("意図的な例外");
+  echo "例外を投げた後\n";
+} catch (RangeException $e) {
+  echo "例外発生:",$e->getMessage()."\n";
+} finally {
+  echo "end\n";
+}
+?>
+```
+↓出力結果
+```
+start
+end
+PHP Fatal error:  Uncaught LengthException: 意図的な例外 in /Applications/MAMP/htdocs/project_php/curriculum_10/10-5.php:4
+Stack trace:
+#0 {main}
+  thrown in /Applications/MAMP/htdocs/project_php/curriculum_10/10-5.php on line 4
+```
+となり、throwとcatchの例外の種類が違うためエラーが発生する。</br>
+</br>
+
+ちなみに`throw`が**例外クラスのオブジェクト以外は投げる事ができない。**</br>
+たとえばthrowとcatchの`Exception`を`DateTime`に変えたりしてもエラーが発生する。</br>
+</br>
+
+***
+
+### 10−6_
