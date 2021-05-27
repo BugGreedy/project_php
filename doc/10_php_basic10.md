@@ -376,7 +376,8 @@ end
 ```
 </br>
 
-次にthrowの`Exception`を**`InvalidArgumentException(引数が期待する形式と一致しなかったことを示す例外)`**に変更してみる。
+次にthrowの`Exception`を
+**`InvalidArgumentException(引数が期待する形式と一致しなかったことを示す例外)`**に変更してみる。
 ```php
 
 
