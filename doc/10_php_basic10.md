@@ -4,6 +4,7 @@
 [10-1_例外処理の概要を理解しよう](#10-1_例外処理の概要を理解しよう)</br>
 [10-2_簡単な例外処理をしてみよう](#10-2_簡単な例外処理をしてみよう)</br>
 [10-3_いろいろな書式で例外に対応しよう](#10-3_いろいろな書式で例外に対応しよう)</br>
+[10-4_throwで意図的に例外を投げよう](#10-4_throwで意図的に例外を投げよう)</br>
 
 
 ***
@@ -227,7 +228,7 @@ try {
   // echo $e->getMessage()."\n";
   echo "指定された日付が不正です。\n";
   // echo "発生した例外：",$e,"\n";
-  fputs(STDERR,$e->getMessage()."\n");
+  fputs(STDERR,$e->getMessage()."\n"); //ここの文法注意。()とかカンマとか
 } finally {
   echo "end\n";
 }
@@ -242,3 +243,8 @@ end
 //エラー出力
 DateTime::__construct(): Failed to parse time string (202x-01-01) at position 0 (2): Unexpected character
 ```
+</br>
+
+***
+
+### 10-4_throwで意図的に例外を投げよう
