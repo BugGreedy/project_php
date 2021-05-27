@@ -3,6 +3,7 @@
 ### 目次
 [10-1_例外処理の概要を理解しよう](#10-1_例外処理の概要を理解しよう)</br>
 [10-2_簡単な例外処理をしてみよう](#10-2_簡単な例外処理をしてみよう)</br>
+[10-3_いろいろな書式で例外に対応しよう](#10-3_いろいろな書式で例外に対応しよう)</br>
 
 
 ***
@@ -116,4 +117,128 @@ Call Stack:
 ***
 
 ### 10-2_簡単な例外処理をしてみよう
-例外が発生するプログラムを作って例外処理を行う。
+例外が発生するプログラムを作って例外処理を行う。</br>
+まず前回同様に架空の日付を出力しようとしてエラーを発生させる。</br>
+```php
+<?php
+echo "start\n";
+$date = new DateTime("199x-01-01");
+echo $date->format('Y,m,d')."\n";
+echo "end\n"
+?>
+```
+↓出力結果
+```
+start
+PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (199x-01-01) at position 0 (1): Unexpected character in /Applications/MAMP/htdocs/project_php/curriculum_10/10-2.php:3
+Stack trace:
+#0 /Applications/MAMP/htdocs/project_php/curriculum_10/10-2.php(3): DateTime->__construct('199x-01-01')
+#1 {main}
+  thrown in /Applications/MAMP/htdocs/project_php/curriculum_10/10-2.php on line 3
+```
+</br>
+
+次に例外処理を記述する。</br>
+```php
+<?php
+echo "start\n";
+try{  //try{例外を捕捉したい処理}
+$date = new DateTime("199x-01-01");
+echo $date->format('Y,m,d')."\n";
+} catch (Exception $e) {          //try{処理}で例外が発生すると$e変数に"例外が発生したというオブジェクト"が代入される。
+  echo $e->getMessage()."\n";     //$eのエラーメッセージを出力
+}  //このcatchブロックを"例外ハンドラ"という。
+echo "end\n";
+?>
+```
+↓出力結果
+```
+start
+DateTime::__construct(): Failed to parse time string (199x-01-01) at position 0 (1): Unexpected character
+end
+```
+このようにエラーが発生した際はcatchブロックの内容が実行され最後まで処理が行われる。</br>
+ここでは`try{例外を捕捉したい処理}`のようにtryブロックの中に例外を捕捉したい処理を記述。</br>
+ここで例外が発生すると`$e変数`に"例外が発生した"というオブジェクト(**エクセプションオブジェクト**)が代入される。</br>
+このcatchブロックを**例外ハンドラ**という。</br>
+</br>
+
+また例外処理では最後の`echo "end\n";`のように例外が発生してもしなくても実行したい処理を`finally{実行したい処理}`として下記のように記述する。
+```php
+<?php
+echo "start\n";
+try{
+$date = new DateTime("199x-01-01");
+echo $date->format('Y,m,d')."\n";
+} catch (Exception $e) {
+  echo $e->getMessage()."\n";
+} finally {
+echo "end\n";
+}
+?>
+```
+↓出力結果
+```
+start
+DateTime::__construct(): Failed to parse time string (199x-01-01) at position 0 (1): Unexpected character
+end
+```
+</br>
+
+***
+
+### 10-3_いろいろな書式で例外に対応しよう
+エラーが発生した際のエラーメッセージを一般の人にでも理解できるようにする。
+```php
+<?php
+echo "start\n";
+try {
+  $date = new DateTime("202x-01-01");
+  echo $date->format('Y/m/d')."\n";
+} catch (Exception $e) {
+  // echo $e->getMessage()."\n";
+  echo "指定された日付が不正です。\n";
+  echo "発生した例外：".$e."\n";
+} finally {
+  echo "end\n";
+}
+?>
+```
+↓出力結果
+```
+start
+指定された日付が不正です。
+発生した例外：Exception: DateTime::__construct(): Failed to parse time string (202x-01-01) at position 0 (2): Unexpected character in /Applications/MAMP/htdocs/project_php/curriculum_10/10-3.php:4
+Stack trace:
+#0 /Applications/MAMP/htdocs/project_php/curriculum_10/10-3.php(4): DateTime->__construct('202x-01-01')
+#1 {main}
+end
+```
+</br>
+
+次に出力タブに通常の出力(標準出力:`STDOUT`)、エラーメッセージをエラー出力(標準エラー出力:`STDERR)に出力するようにする。
+```php
+<?php
+echo "start\n";
+try {
+  $date = new DateTime("202x-01-01");
+  echo $date->format('Y/m/d')."\n";
+} catch (Exception $e) {
+  // echo $e->getMessage()."\n";
+  echo "指定された日付が不正です。\n";
+  // echo "発生した例外：",$e,"\n";
+  fputs(STDERR,$e->getMessage()."\n");
+} finally {
+  echo "end\n";
+}
+?>
+```
+↓出力結果
+```php
+//標準出力
+start
+指定された日付が不正です。
+end
+//エラー出力
+DateTime::__construct(): Failed to parse time string (202x-01-01) at position 0 (2): Unexpected character
+```

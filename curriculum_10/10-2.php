@@ -1,6 +1,11 @@
 <?php
 echo "start\n";
-$date = new DateTime("1999-01-01");
+try{
+$date = new DateTime("199x-01-01");
 echo $date->format('Y,m,d')."\n";
-echo "end\n"
+} catch (Exception $e) {
+  echo $e->getMessage()."\n";
+} finally {
+echo "end\n";
+}
 ?>
