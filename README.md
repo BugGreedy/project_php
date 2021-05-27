@@ -14,6 +14,7 @@
 [PHP入門編7:関数を理解しよう](doc/07_php_basic07.md)</br>
 [PHP入門編8:クラスを理解しよう](doc/08_php_basic08.md)</br>
 [PHP入門編9:さらにクラスを理解しよう](doc/09_php_basic09.md)</br>
+[PHP入門編10:例外処理を理解しよう](doc/10_php_basic10.md)</br>
 [備考メモ・関数など](doc/memo.md)</br>
 
 </br>
