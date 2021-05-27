@@ -6,6 +6,7 @@
 [10-3_いろいろな書式で例外に対応しよう](#10-3_いろいろな書式で例外に対応しよう)</br>
 [10-4_throwで意図的に例外を投げよう](#10-4_throwで意図的に例外を投げよう)</br>
 [10-5_発生させる例外を変えてみよう](#10-5_発生させる例外を変えてみよう)</br>
+[10-6_複数の例外を捕捉してみよう](#10-6_複数の例外を捕捉してみよう)</br>
 
 
 ***
@@ -338,4 +339,45 @@ Stack trace:
 
 ***
 
-### 10−6_
+### 10-6_複数の例外を捕捉してみよう
+前回までは処理に対して一つの例外しか発生しない体で記述を行ってきた。</br>
+今回は複数の例外が発生する条件で記述を行う。</br>
+```php
+<?php
+echo "start\n";
+try {
+  $pattern = 0;
+  if($pattern == 0){
+    throw new RangeException("意図的な範囲例外");  
+  } else if($pattern == 1) {
+    throw new LengthException("意図的な長さ例外");
+  } else {
+    throw new Exception("意図的なその他例外");
+  }
+    echo "例外を投げた後\n";
+} catch (RangeException $e) {
+  echo "例外発生1:", $e->getMessage() . "\n";
+} catch (LengthException $e) {
+  echo "例外発生2:", $e->getMessage() . "\n";
+} catch (Exception $e) {
+  echo "例外発生3:", $e->getMessage() . "\n";
+} finally {
+  echo "end\n";
+}
+?>
+```
+↓出力結果
+```php
+start
+例外発生1:意図的な範囲例外
+end
+
+// $pattern = 0を1またはその他に変更すれば出力されるエラーメッセージが変わる。
+```
+</br>
+
+次にthrowの`Exception`を**`InvalidArgumentException(引数が期待する形式と一致しなかったことを示す例外)`**に変更してみる。
+```php
+
+
+
