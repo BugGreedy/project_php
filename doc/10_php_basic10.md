@@ -7,6 +7,7 @@
 [10-4_throwで意図的に例外を投げよう](#10-4_throwで意図的に例外を投げよう)</br>
 [10-5_発生させる例外を変えてみよう](#10-5_発生させる例外を変えてみよう)</br>
 [10-6_複数の例外を捕捉してみよう](#10-6_複数の例外を捕捉してみよう)</br>
+[10-7_例外処理の呼び出し元に任せよう](#10-7_例外処理の呼び出し元に任せよう)</br>
 
 
 ***
@@ -376,9 +377,122 @@ end
 ```
 </br>
 
-次にthrowの`Exception`を
-**`InvalidArgumentException(引数が期待する形式と一致しなかったことを示す例外)`**に変更してみる。
+次にthrowの`Exception`を`InvalidArgumentException(引数が期待する形式と一致しなかったことを示す例外)`に変更してみる。
 ```php
+<?php
+echo "start\n";
+try {
+  $pattern = 3;
+  if($pattern == 0){
+    throw new RangeException("意図的な範囲例外");  
+  } else if($pattern == 1) {
+    throw new LengthException("意図的な長さ例外");
+  } else {
+    throw new InvalidArgumentException("意図的なその他例外");   //変更箇所
+  }
+    echo "例外を投げた後\n";
+} catch (RangeException $e) {
+  echo "例外発生1:", $e->getMessage() . "\n";
+} catch (LengthException $e) {
+  echo "例外発生2:", $e->getMessage() . "\n";
+} catch (Exception $e) {
+  echo "例外発生3:", $e->getMessage() . "\n";
+} finally {
+  echo "end\n";
+}
+?>
+```
+↓出力結果
+```
+start
+例外発生3:意図的なその他例外
+end
+```
+というようにExceptionオブジェクトで捕捉できる。</br>
+これは**Exceptionクラスが全ての例外クラスのスーパークラス(親クラス)である**からである。
 
+***
 
+### 10-7_例外処理の呼び出し元に任せよう
+例外が発生した事を関数の呼び出し元に知らせ、その対応を任せる。
+```php
+<?php
+function test_exception($date){
+  echo "2\n";
+  try {
+    echo "3\n";
+    return new DateTime($date);
+    echo "4\n";
+  } catch (Exception $e){
+    echo "5\n";
+    throw $e;
+  }
+  echo "6\n";
+}
+
+echo "1\n";
+
+try {
+  $dateTime = test_exception('1991-01-01');
+  echo "7\n";
+} catch (Exception $e){
+  echo "8\n";
+}
+echo "9\n";
+?>
+```
+↓出力結果
+```
+1
+2
+3
+7
+9
+```
+上記はfunction内の`return new DateTime($date);`が正常に処理されていることから、その後の"4"と例外処理のcatchブロックの"5",その後の"6"、また関数の呼び出し先のcatchブロック内の"8"は実行されていない。</br>
+</br>
+
+次に例外が発生するパターン。
+```php
+<?php
+function test_exception($date){
+  echo "2\n";
+  try {
+    echo "3\n";
+    return new DateTime($date);
+    echo "4\n";
+  } catch (Exception $e){
+    echo "5\n";
+    throw $e;
+  }
+  echo "6\n";
+}
+
+echo "1\n";
+
+try {
+  $dateTime = test_exception('199x-01-01');
+  echo "7\n";
+} catch (Exception $e){
+  echo "8\n";
+}
+echo "9\n";
+?>
+```
+↓出力結果
+```
+1
+2
+3
+5
+8
+9
+```
+ここでは呼び出し元でも呼び出し先でもcatchブロック内の内容が実行されている。</br>
+</br>
+
+また、`echo "6\n";`が正常な場合でも例外の場合でも実行されていないのは、呼び出し元において、関数が実行されたりthrowでエラーを投げられたりするとその後の処理が行われないからである。</br>
+</br>
+
+***
 

@@ -1,7 +1,7 @@
 <?php
 echo "start\n";
 try {
-  $pattern = 0;
+  $pattern = 3;
   if($pattern == 0){
     throw new RangeException("意図的な範囲例外");  
   } else if($pattern == 1) {
