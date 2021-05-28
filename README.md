@@ -18,9 +18,6 @@
 [PHP入門編10:例外処理を理解しよう](doc/10_php_basic10.md)</br>
 [備考メモ・関数など](doc/memo.md)</br>
 
-### Webアプリ開発入門 PHP-Web編
-[PHP-Web入門編1:PHPでWebアプリケーションを開発しよう](doc/w01_php_web01.md)</br>
-
 
 
 </br>
