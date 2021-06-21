@@ -12,6 +12,7 @@
       "port": 9001,
         "pathMappings": {
           "${workspaceRoot}": "${workspaceRoot}"
+      "console":"integratedTerminal"
     },
     {
       "name": "Launch currently open script",
@@ -20,6 +21,7 @@
       "program": "${file}",
       "cwd": "${fileDirname}",
       "port": 9001
+      "console": "integratedTerminal"
     }
   ]
 }

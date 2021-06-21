@@ -1,3 +1,2 @@
 <?php
-  echo ceil(3.1415);
-?>
+echo "hello world";
